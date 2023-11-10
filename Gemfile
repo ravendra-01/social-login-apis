@@ -46,3 +46,7 @@ group :development do
   # gem "spring"
 end
 
+gem 'byebug'
+gem 'devise'
+gem 'devise_token_auth'
+gem 'rack-cors'
