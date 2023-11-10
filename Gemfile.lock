@@ -94,6 +94,8 @@ GEM
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.2)
+    fast_jsonapi (1.5)
+      activesupport (>= 4.2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
@@ -228,6 +230,7 @@ DEPENDENCIES
   debug
   devise
   devise_token_auth
+  fast_jsonapi
   httparty
   omniauth-google-oauth2
   pg (~> 1.1)
