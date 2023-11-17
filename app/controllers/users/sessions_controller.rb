@@ -13,8 +13,9 @@ class Users::SessionsController < DeviseTokenAuth::SessionsController
   def create
     if params[:login_type] == "social"
       url = "https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=#{params["id_token"]}"                  
-      response = HTTParty.get(url)                   
-      @user = User.create_user_for_google(response.parsed_response)                
+      response = HTTParty.get(url)
+      @user = User.where(uid: response.parsed_response["email"]).first                   
+      @user = User.create_user_for_google(response.parsed_response) unless @user               
     else
       @user = User.find_by(email: params[:email])
       unless @user.valid_password?(params[:password])
@@ -24,7 +25,6 @@ class Users::SessionsController < DeviseTokenAuth::SessionsController
         }, status: :unprocessable_entity
       end
     end
-    @user.save
     tokens = @user.create_new_auth_token
     set_headers(tokens)
     respond_with @user
