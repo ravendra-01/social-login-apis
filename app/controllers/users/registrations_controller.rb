@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Users::RegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < DeviseTokenAuth::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -10,9 +10,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+    token = @resource.create_new_auth_token
+    set_headers(token)
+  end
 
   # GET /resource/edit
   # def edit
@@ -59,4 +61,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+  def set_headers(tokens)
+    headers['access-token'] = (tokens['access-token']).to_s
+    headers['client'] =  (tokens['client']).to_s
+    headers['expiry'] =  (tokens['expiry']).to_s
+    headers['uid'] =@resource.uid             
+    headers['token-type'] = (tokens['token-type']).to_s
+    headers['Authorization'] = (tokens['Authorization']).to_s                
+  end
 end
