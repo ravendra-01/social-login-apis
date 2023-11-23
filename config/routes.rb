@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :posts
+  post '/email_otps', to: 'email_otps#create'
+  post '/email_otps/otp_confirmation', to: 'email_otps#otp_confirmation'
+  post '/profiles/change_password', to: 'profiles#change_password'
 end

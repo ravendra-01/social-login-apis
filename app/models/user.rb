@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   include DeviseTokenAuth::Concerns::User
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :rememberable, :validatable, :confirmable,
          :omniauthable,
          omniauth_providers: %i[google_oauth2]
 

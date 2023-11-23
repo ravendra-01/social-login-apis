@@ -12,8 +12,10 @@ class Users::RegistrationsController < DeviseTokenAuth::RegistrationsController
   # POST /resource
   def create
     super
-    token = @resource.create_new_auth_token
-    set_headers(token)
+    if @resource.persisted?
+      token = @resource.create_new_auth_token
+      set_headers(token)
+    end
   end
 
   # GET /resource/edit

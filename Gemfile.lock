@@ -232,6 +232,7 @@ DEPENDENCIES
   devise_token_auth
   fast_jsonapi
   httparty
+  jwt
   omniauth-google-oauth2
   pg (~> 1.1)
   puma (~> 5.0)
